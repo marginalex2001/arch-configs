@@ -1,0 +1,36 @@
+settings {
+    logfile = "/var/log/lsyncd.log",
+    statusFile = "/var/log/lsyncd.stat",
+    statusInterval = 5,
+    insist = true,
+    nodaemon = false,
+}
+
+local repo_base = "/home/alex/configs";
+
+local paths = {
+    "/etc/skel",
+}
+
+for _, src_path in ipairs(paths) do
+    sync {
+        default.rsync,
+        source=src_path,
+        target=repo_base .. src_path,
+        rsync = {
+            archive  = true,
+        }
+    }
+end
+sync {
+    default.rsync,
+    source="/etc/default/",
+    target=repo_base .. "/etc/defaullt/",
+    rsync = {
+        archive  = true,
+        _extra = {
+            "--exclude=*",
+            "--include=useradd"
+        }
+    }
+}

@@ -1,0 +1,3 @@
+[submodule "etc/skel/.oh-my-zsh"]
+	path = etc/skel/.oh-my-zsh
+	url = https://github.com/ohmyzsh/ohmyzsh/
